@@ -29,7 +29,7 @@ Swift implementation of the guide page package, support for multiple pictures an
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
+    
   s.source_files = 'RSGuidePageLib/Classes/**/*'
   
   s.requires_arc = true
