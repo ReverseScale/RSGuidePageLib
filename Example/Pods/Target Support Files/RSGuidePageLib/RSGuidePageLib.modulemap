@@ -1,0 +1,6 @@
+framework module RSGuidePageLib {
+  umbrella header "RSGuidePageLib-umbrella.h"
+
+  export *
+  module * { export * }
+}
