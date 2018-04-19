@@ -11,12 +11,12 @@ import AVFoundation
 import MediaPlayer
 import AVKit
 
-enum GuideType {
+public enum GuideType {
     case video // 视频类型
     case picture // 图片类型
 }
 
-class GuideController: UIViewController {
+public class GuideController: UIViewController {
     
     fileprivate var type:GuideType?
     /// 视频地址
@@ -35,16 +35,15 @@ class GuideController: UIViewController {
     // 滑入动画
     fileprivate var presentAnimator:PresentAnimator?
     
-    /*
-     * 初始化该引导页视图，
-     *  - Parameters:
-     *    - guideType: 是视频还是图片
-     *    - picture: 如果是图片，这里传入图片数组，如果是视频，这里传入nil
-     *    - videoPath: 如果是视频，这里传入视频地址，如果是图片，这里传入nil
-     *    - pushViewController: 点击进入按钮展示的页面
-     */
-    convenience init(guide:GuideType, pictures:[String]?,videoPath:String?,pushViewController:UIViewController?) {
-        self.init()
+    
+    /// 初始化该引导页视图
+    ///
+    /// - Parameters:
+    ///   - guide: 是视频还是图片
+    ///   - pictures: 如果是图片，这里传入图片数组，如果是视频，这里传入nil
+    ///   - videoPath: 如果是视频，这里传入视频地址，如果是图片，这里传入nil
+    ///   - pushViewController: 点击进入按钮展示的页面
+    public func createGuidePage(guide:GuideType, pictures:[String]?,videoPath:String?,pushViewController:UIViewController?) {
         self.type = guide
         self.pushViewController = pushViewController
         if pictures != nil {
@@ -54,10 +53,9 @@ class GuideController: UIViewController {
             self.videoPath = videoPath
         }
         pushViewController?.transitioningDelegate = self
-        
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.view.isUserInteractionEnabled = true
         self.view.backgroundColor = UIColor.white
@@ -170,7 +168,7 @@ extension GuideController{
 }
 
 extension GuideController:UIScrollViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.pageCtr?.currentPage = Int(scrollView.contentOffset.x/self.view.frame.size.width)
         if scrollView.contentOffset.x == CGFloat(self.pictures!.count-1)*self.view.frame.size.width {
             UIView.animate(withDuration: 0.5, animations: {
@@ -188,10 +186,10 @@ extension GuideController:UIScrollViewDelegate{
 }
 
 extension GuideController:UIViewControllerTransitioningDelegate{
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self.presentAnimator
     }
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
     }
 }
