@@ -34,6 +34,8 @@ Swift implementation of the guide page package, support for multiple pictures an
   
   s.requires_arc = true
   
+  s.swift_version = '4.0'
+  
   # s.resource_bundles = {
   #   'RSGuidePageLib' => ['RSGuidePageLib/Assets/*.png']
   # }
